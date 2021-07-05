@@ -1,0 +1,280 @@
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+  {% load static %}
+  <link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static "font_awesome/css/all.css" %}" >
+  <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "bootstrap/css/mdb.css" %}" rel="stylesheet">
+
+
+  {% if meta %}
+    <meta name="description" content="{{meta.description}}">
+  {% endif %}
+
+  <title> {% if meta %} {{meta.title}} {% endif %}</title>
+</head>
+<body>
+
+  <div class="container">
+    <header class="blog-header py-3">
+      <div class="row justify-content-between align-items-center">
+        <a class="navbar-brand ml-4" href="/">
+          <img src="/media/images/home/logo.png" height="70" alt="logo">
+        </a>
+         <div class="col-md-3">
+          <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+              <a class="btn-floating btn-fb mx-1">
+                <i class="fab fa-facebook-f"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-tw mx-1">
+                <i class="fab fa-twitter"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-gplus mx-1">
+                <i class="fab fa-google-plus-g"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-li mx-1">
+                <i class="fab fa-linkedin-in"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-dribbble mx-1">
+                <i class="fab fa-dribbble"> </i>
+              </a>
+            </li>
+          </ul>
+
+         </div> 
+        <div class="col-md-3 d-flex flex-column ">
+        <div class = "d-flex justify-content-end align-items-center">
+          <i class="fas fa-phone-alt "></i>&nbsp
+           <a href='tel:+790403403013' style= "font-size: 19px; color: black; font-weight: 600; ">+ 7 (904) 034 3013 </a> 
+        </div> 
+        
+        <div class = "d-flex justify-content-end align-items-center">
+          <i class="fas fa-envelope"></i>&nbsp
+           <a href='' style= "font-size: 19px; color: black">ivanhel@yandex.ru </a> 
+        </div> 
+        
+          <!---  <a class="text-muted" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+          </a>
+          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a> --> 
+        </div>
+      </div>
+
+    <div class="nav-scroller py-1 mb-2">
+
+      <nav class="nav d-flex justify-content-between">
+      {% for me in menu %}
+      <div class = 'menu_lv1'> 
+        <a class="p-2 text-muted" href="{% url "uslugi:category" me.level1.slug %}">{{me.level1.title }}</a>
+        <div class = 'menu_lv2' style = "display: none; position: absolute; z-index:10; ">
+        {% if me.level2 %}
+        <ul class= 'list-group list-group-flush"'> 
+        {% for children in me.level2 %}
+        <li class= 'list-group-item'> 
+            <a href={% url "uslugi:children_category" me.level1.slug children.slug %}> {{children.title}} </a>
+        </li> 
+        {% endfor %}
+        </ul> 
+        {% endif %}
+
+        </div> 
+      </div> 
+
+      {% endfor %}
+      {% for me in menu_article %}
+      <div class = 'menu_lv1'> 
+        <a class="p-2 text-muted" href="{% url "uslugi:category" me.level1.slug %}">{{me.level1.title }}</a>
+        <div class = 'menu_lv2' style = "display: none; position: absolute; z-index:10;">
+        {% if me.level2 %}
+        <ul class= 'list-group list-group-flush"'> 
+        {% for children in me.level2 %}
+        <li class= 'list-group-item'> 
+            <a href={% url "uslugi:category" children.slug %}> {{children.title}} </a>
+        </li> 
+        {% endfor %}
+        </ul> 
+        {% endif %}
+
+        </div> 
+      </div> 
+
+      {% endfor %}
+
+
+      </nav>
+    </div>
+    </header>
+        <hr class="mt-0 mb-4">
+        {% block content %}
+        {% endblock %}
+  </div> 
+
+
+<!-- Footer -->
+<hr> 
+<footer class="page-footer font-small stylish-color-dark pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mx-auto">
+
+        <!-- Content -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">О нас</h5>
+        <p>Наша компания производит качественное обслуживание компьютерной и мобильной техники по лучшим ценам во Владимире. </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Услуги</h5>
+
+        <ul class="list-unstyled">
+        {% for menu in menu_list %}
+          <li>
+            <a href="{% url 'uslugi:category' menu.slug %}">{{menu.title}}</a>
+          </li>
+          {% endfor %}
+          
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+       <div class="col-md-2 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Информация</h5>
+
+        <ul class="list-unstyled">
+        {% for menu in menu_article %}
+          <li>
+            <a href="{% url 'uslugi:category' menu.level1.slug %}">{{menu.level1.title}}</a>
+          </li>
+          {% endfor %}
+          
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <div class="col-md-2 mx-auto">
+
+      </div>
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <hr>
+
+  <!-- Call to action -->
+  <ul class="list-unstyled list-inline text-center py-2">
+    <li class="list-inline-item">
+      <h5 class="mb-1">Оставь заявку! </h5>
+    </li>
+    <li class="list-inline-item">
+      <a href="tel:+790403403013" class="btn btn-danger btn-rounded">Обратный звонок</a>
+    </li>
+  </ul>
+  <!-- Call to action -->
+
+  <hr>
+
+  <!-- Social buttons -->
+  <ul class="list-unstyled list-inline text-center">
+    <li class="list-inline-item">
+      <a class="btn-floating btn-fb mx-1">
+        <i class="fab fa-facebook-f"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-tw mx-1">
+        <i class="fab fa-twitter"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-gplus mx-1">
+        <i class="fab fa-google-plus-g"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-li mx-1">
+        <i class="fab fa-linkedin-in"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-dribbble mx-1">
+        <i class="fab fa-dribbble"> </i>
+      </a>
+    </li>
+  </ul>
+  <!-- Social buttons -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> ComputerMaster.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+<script src="{% static "js/jquery-3.5.1.min.js" %}"></script>
+<script src="{% static "bootstrap/js/popper.js" %}"></script>
+<script src="{% static "bootstrap/js/mdb.js" %}"></script>
+<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+
+
+<script> 
+
+$('.menu_lv1').hover(function(){
+  $(this).find('.menu_lv2').fadeIn(300); 
+}, 
+function(){ 
+  $('.menu_lv2').fadeOut(300); 
+}
+
+); 
+
+
+
+
+</script>
+
+
+</body>
+
+
+
+  
+</html>

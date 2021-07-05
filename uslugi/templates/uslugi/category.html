@@ -1,0 +1,96 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if category.h1 %}
+          <h1> {{category.h1}} </h1> 
+     {% endif %}     
+
+      {% if category.content != None %}
+        {{ category.content|safe }} 
+      {% endif %}
+
+ {% if uslugies %}
+
+         <div class="row">
+            {% for uslugi in uslugies %}
+
+                    <div class="col-md-4"> 
+
+                        <a class="card hoverable mb-4" href="{% url 'uslugi:uslugi' category.parent.slug category.slug uslugi.slug  %}" >
+      
+                            <!-- Card image -->
+                            <img class="card-img-top" src="/{{ uslugi.image }}" alt="{{uslugi.title}}">
+              
+                            <!-- Card content -->
+                            <div class="card-body">
+              
+                              <h5 class="my-3">{{ uslugi.title }}</h5>
+                            </div>
+              
+                          </a>
+                        </div> 
+
+                    {% if forloop.counter|divisibleby:"3" %}
+                </div>  
+                 <div class="row">
+                {% endif %}
+            {% endfor %} 
+        </div> 
+      
+      {% endif %} 
+      {% if children_category%}
+        <br>
+        <h2> Услуги </h2>
+        <hr>
+         <div class="row">
+            {% for cat in children_category %}
+                    <!--<img src="/media/{{ cat.image }}" width="100px"> --> 
+                    
+     
+                    <div class="col-md-4"> 
+            
+                        <a class="card hoverable mb-4" href="{% url 'uslugi:children_category' category.slug cat.slug %}" >
+      
+                            <!-- Card image -->
+                            <img class="card-img-top" src="/media/{{ cat.image }}" alt="{{cat.title}}">
+              
+                            <!-- Card content -->
+                            <div class="card-body">
+              
+                              <h5 class="my-3">{{ cat.title }}</h5>
+                            </div>
+              
+                          </a>
+                        </div> 
+
+                    {% if forloop.counter|divisibleby:"3" %}
+                </div>  
+                 <div class="row">
+                {% endif %}
+               
+            {% endfor %} 
+        </div> 
+      
+      {% endif %} 
+
+
+
+<!--- Блоки преимуществ -->
+
+{% include 'mobile/advantages.html' %}
+
+<!-- Форма -->
+{% include 'mobile/form.html' %}
+
+<!---Отзывы-->
+{% include 'mobile/reviews.html' %}
+
+
+
+
+
+{% endblock %}
+
+
+

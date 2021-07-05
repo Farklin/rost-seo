@@ -1,0 +1,40 @@
+  
+ <div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Мы перезвоним!</strong>
+    </h5>
+
+    <div class="card-body px-lg-5">
+      <!-- Form -->
+    
+          <p>Оставь заявку и мы обязательно Вам перезвоним</p>
+
+          <form class="text-center" style="color: #757575;" action="{% url 'uslugi:application'%}" method="POST">
+           {%  csrf_token %}
+          <!-- Name -->
+          <div class="md-form mt-3">
+              <input name='phone' type="text" id="materialSubscriptionFormPasswords" class="form-control">
+              <label for="materialSubscriptionFormPasswords">Номер телефона</label>
+          </div>
+
+          <!-- E-mai -->
+          <div class="md-form">
+              <input name='name' type="text" id="materialSubscriptionFormEmail" class="form-control">
+              <label for="materialSubscriptionFormEmail">Ваше Имя</label>
+          </div>
+          
+          <div class="md-form">
+            <input name='comment' type="text" id="materialSubscriptionFormEmail" class="form-control">
+            <label for="materialSubscriptionFormEmail">Коментарий</label>
+          </div>
+
+          <!-- Sign in button -->
+          <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit" >Отправить</button>
+
+      </form>
+    
+      <!-- Form -->
+    </div>
+
+</div>

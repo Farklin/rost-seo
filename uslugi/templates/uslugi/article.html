@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if article.h1 %}
+          <h1> {{article.h1}} </h1> 
+     {% endif %}     
+
+  {{article.content|safe}}
+</div>
+{% endblock %}
+
+
+

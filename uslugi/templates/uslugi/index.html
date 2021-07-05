@@ -1,0 +1,174 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+       <h1> Сервисный центр </h1>
+
+        <hr>
+        <div class="row">
+            {% for cat in categoryes %}
+                    <!--<img src="/media/{{ cat.image }}" width="100px"> --> 
+                    
+                    <div class="col-md-4"> 
+            
+                        <a class="card hoverable mb-4" href="{% url 'uslugi:category' cat.slug %}" >
+      
+                            <!-- Card image -->
+                            <img class="card-img-top" src="/media/{{ cat.image }}" alt="Card image cap">
+              
+                            <!-- Card content -->
+                            <div class="card-body">
+              
+                              <h5 class="my-3">{{ cat.title }}</h5>
+                            </div>
+              
+                          </a>
+                        </div> 
+
+                    {% if forloop.counter|divisibleby:"3" %}
+                </div>
+                <div class="row">
+                {% endif %}
+               
+            {% endfor %} 
+        </div> 
+        
+        <div class="content"> 
+            <p> Мы производим ремонт любой компьютерной технки в кротчайшие сроки. Качесвтенное обслуживание вашей техники по низким ценам.
+                Акции и скидки постоянным клиентам. Оставляй заявку наш менеджер свяжется с вами.
+            </p> 
+
+
+        </div>
+
+
+       <div class="container z-depth-1 my-5">
+
+
+
+
+  <section class="text-center py-5">
+
+    <p class="mb-4 pb-2 lead font-weight-bold" style = "font-size: 22px;">Наши партнеры</p>
+
+    <!-- Logo carousel -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="1800">
+      <div class="carousel-inner">
+        <!-- First slide -->
+        <div class="carousel-item active">
+          <!--Grid row-->
+          <div class="row">
+
+            <!--First column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/5.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/First column-->
+
+            <!--Second column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/7.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Second column-->
+
+            <!--Third column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/6.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Third column-->
+
+            <!--Fourth column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/9.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Fourth column-->
+
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!-- First slide -->
+
+        <!-- Second slide -->
+        <div class="carousel-item">
+          <!--Grid row-->
+          <div class="row">
+
+            <!--First column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/11.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/First column-->
+
+            <!--Second column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/10.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Second column-->
+
+            <!--Third column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/12.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Third column-->
+
+            <!--Fourth column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/13.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Fourth column-->
+
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!-- Second slide -->
+
+        <!-- Third slide -->
+        <div class="carousel-item">
+          <!--Grid row-->
+          <div class="row">
+
+            <!--First column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/1a.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/First column-->
+
+            <!--Second column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/2a.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Second column-->
+
+            <!--Third column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/3a.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Third column-->
+
+            <!--Fourth column-->
+            <div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+              <img src="https://mdbootstrap.com/img/Photos/Template/4a.png" class="img-fluid px-4" alt="Logo">
+            </div>
+            <!--/Fourth column-->
+
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!-- Third slide -->
+      </div>
+
+    </div>
+    <!-- Logo carousel -->
+    
+  </section>
+
+      </div>
+
+{% include 'mobile/reviews.html' %}
+    
+
+    </body> 
+<html>
+    {% endblock %}
+

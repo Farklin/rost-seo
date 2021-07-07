@@ -79,7 +79,7 @@ class Uslusgi(models.Model):
     published = models.BooleanField(verbose_name = 'Публикация', default='False') 
     price = models.IntegerField(verbose_name = 'Цена', default='1')
     image = models.ImageField(verbose_name = 'Изображение', null = True, upload_to = 'images/' , blank = 'null', default = 'images/no_photo/no_photo.png') 
-
+    basic = models.BooleanField(verbose_name="Основной", default='0')  
     parent_category = models.ForeignKey(Category, verbose_name='Главная категория', on_delete=models.PROTECT, null = True, blank=True)
     similar_services = models.ManyToManyField('self', verbose_name='Похожие услуги', null = True,  blank=True)
     sorting = models.IntegerField(max_length=1, verbose_name='Сортировка', default='1', null = True)

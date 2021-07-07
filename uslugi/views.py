@@ -1,4 +1,5 @@
 import re
+from django.db.models import base
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http.response import Http404, HttpResponseRedirect
@@ -92,22 +93,53 @@ def e_handler404(request, exception):
     return render(request, '404.html')
 
 def create_regions(request): 
-    regions = Region.objects.all() 
-    for reg in regions: 
-        category = Category.objects.get(region=reg.id)
-        new_category = Category()
-        new_category.content = category.content
-        new_category.parent = category
-        new_category.slug = reg.slug
-        new_category.region = reg
-        new_category.h1 = category.h1 + ' ' + reg.title
-        new_category.base = False 
-        new_category.immutable = False 
-        new_category.published = True 
-        new_category.save() 
+    # regions = Region.objects.all() 
+    # for reg in regions: 
+    #     category = Category.objects.get(region=reg.id)
+    #     new_category = Category()
+    #     new_category.content = category.content
+    #     new_category.parent = category
+    #     new_category.slug = reg.slug
+    #     new_category.region = reg
+    #     new_category.h1 = category.h1 + ' ' + reg.title
+    #     new_category.base = False 
+    #     new_category.immutable = False 
+    #     new_category.published = True 
+    #     new_category.save() 
 
-    # for reg in mas: 
+    # regions = Region.objects.all() 
+    # for reg in regions: 
+    #     if reg.title != 'Россия': 
+    #         create_services_regions(Category.objects.get(title=reg.title), Category.objects.get(title='Создание и продвижение сайтов'), reg)
+    
+    create_uslugi_regions(Category.objects.get(title='Москва'), Category.objects.get(title='Продвижение сайтов'), Region.objects.get(title='Москва') )
+
+def create_services_regions(general_cat_reg, general_basic_category, reg): 
+    basic_category = Category.objects.filter(parent = general_basic_category)
+
+    for category in basic_category: 
+        if not Category.objects.get(h1 = category.h1 + ' ' + reg.title): 
+            pass
+        # category = Category.objects.get(region=reg.id)
+        # new_category = Category()
+        # new_category.content = category.content
+        # new_category.parent = category
+        # new_category.region = reg
+        # new_category.h1 = category.h1 + ' ' + reg.title
+        # new_category.basic = False 
+        # new_category.immutable = False 
+        # new_category.published = True 
+        # new_category.save() 
         
-    #     r = Region() 
-    #     r.title = reg
-    #     r.save() 
+
+
+def create_uslugi_regions(category_region, category_serveces, reg): 
+    basic_uslugi = Uslusgi.objects.filter(basic=True)
+
+    for uslugi in basic_uslugi: 
+        print(uslugi.h1)
+        uslugi.id = None 
+        uslugi.parent_category = category_serveces 
+        uslugi.h1 = uslugi.h1 + ' ' + reg.title
+        uslugi.slug += '-' + str(reg.id) 
+        uslugi.save()

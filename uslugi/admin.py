@@ -27,7 +27,7 @@ class CategoryAdmin(ImportExportActionModelAdmin):
     list_display = [field.name for field in Category._meta.fields if field.name != "id" and field.name != "content"]
     list_display.append('image_img')
     list_display.remove('image')
-    list_filter = ['published']
+    list_filter = ['published', 'basic']
     search_fields = ['title']
     readonly_fields = ['image_img',]
     

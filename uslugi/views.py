@@ -96,11 +96,18 @@ def create_regions(request):
     for reg in Region.objects.all(): 
         if reg.title != 'Россия': 
             level1 = Category.objects.get(title = reg.title)
-            print(level1.title)
             for basic in Category.objects.filter(basic = True): 
-                if basic.title != 'Создание и продвижение сайтов': 
-                    print('---' + basic.title)
-                    for uslugi in Uslusgi.objects.filter(parent_category = basic): 
+                if basic.title != 'Создание и продвижение сайтов':
+                    basic_save = basic.copy()  
+                    basic.id = None 
+                    basic.h1 = basic.h1 + ' ' + reg.title
+                    basic.parent_category = level1
+                    print('---' + basic.h1)
+                    for uslugi in Uslusgi.objects.filter(parent_category = basic_save): 
+                       
+                        uslugi.id = None 
+                        uslugi.h1 = uslugi.h1 + ' ' + reg.title
+                        uslugi.parent_category = basic
                         print('-------' + uslugi.title)
 
 
